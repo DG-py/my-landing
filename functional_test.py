@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 import unittest
 
 class BasicInstallTest(unittest.TestCase):
@@ -24,9 +25,22 @@ class BasicInstallTest(unittest.TestCase):
 
     def test_home_page_header(self):
         # В ШАПКЕ САЙТА НАПИССАНО ( РАСУЛ СУЛЕЙМАНОВ)
-        browser = self.browser.get('http://127.0.0.1:8000')
-        header = browser.find_elements_by_tag_name('h1')[0]
-        self.assertIn('РАСУЛ СУЛЕЙМАНОВ', header)
+        self.browser.get('http://127.0.0.1:8000')
+        header = self.browser.find_element(By.TAG_NAME, 'h1')
+        self.assertIn('Rasul Suleymanov', header.text)
+
+    def test_home_page_blog_foto(self):
+        # ПОД ШАПКОЙ ПРОФИЛЯ (О БОМНЕ)
+        self.browser.get('http://127.0.0.1:8000')
+        article_list = self.browser.find_element_by_class_name('article-list')
+        self.assertTrue(article_list)
+
+    def test_home_page_articles_look_correct(self):
+        # ПОД СТАТЬЕЙ ОБО МНЕ (МОИ СКИЛЫ)
+        self.browser.get('http://127.0.0.1:8000')
+        article_title = self.browser.find_element_by_class_name('article-summary')
+        self.assertTrue(article_title)
+        self.assertTrue(article_summary)
 
 
 if __name__ == '__main__':
@@ -37,7 +51,7 @@ if __name__ == '__main__':
 
 
 
-# ПОД ШАПКОЙ ПРОФИЛЯ (О БОМНЕ)
+
 
 # ПОД СТАТЬЕЙ ОБО МНЕ (МОИ СКИЛЫ)
 
